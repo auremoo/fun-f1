@@ -4,14 +4,13 @@ import path from "path";
 
 export default defineConfig({
   plugins: [react()],
+  base: '/fun-f1/',
   server: {
     port: 5173,
     open: true,
   },
-  root: ".",
   build: {
     outDir: "dist",
-    minify: "terser",
   },
   resolve: {
     alias: {

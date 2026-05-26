@@ -1,0 +1,54 @@
+<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+
+  <!-- Fond noir, coins droits -->
+  <rect width="512" height="512" fill="#0b0b0b"/>
+
+  <!-- Bande rouge en bas (ligne de départ) -->
+  <rect x="0" y="488" width="512" height="24" fill="#e10600"/>
+
+  <!-- 5 feux de départ FIA — centrés horizontalement -->
+  <!-- r=30, espacement 80px, total=400px, offset gauche=56 -->
+  <circle cx="56"  cy="178" r="30" fill="#1a1a1a" stroke="#333" stroke-width="4"/>
+  <circle cx="136" cy="178" r="30" fill="#1a1a1a" stroke="#333" stroke-width="4"/>
+  <circle cx="216" cy="178" r="30" fill="#1a1a1a" stroke="#333" stroke-width="4"/>
+  <circle cx="296" cy="178" r="30" fill="#1a1a1a" stroke="#333" stroke-width="4"/>
+  <circle cx="376" cy="178" r="30" fill="#1a1a1a" stroke="#333" stroke-width="4"/>
+
+  <!-- Lumières rouges allumées (intérieur) -->
+  <circle cx="56"  cy="178" r="20" fill="#e10600"/>
+  <circle cx="136" cy="178" r="20" fill="#e10600"/>
+  <circle cx="216" cy="178" r="20" fill="#e10600"/>
+  <circle cx="296" cy="178" r="20" fill="#e10600"/>
+  <circle cx="376" cy="178" r="20" fill="#e10600"/>
+
+  <!-- Reflet (spéculaire) sur chaque feu -->
+  <circle cx="48"  cy="170" r="6" fill="rgba(255,255,255,0.25)"/>
+  <circle cx="128" cy="170" r="6" fill="rgba(255,255,255,0.25)"/>
+  <circle cx="208" cy="170" r="6" fill="rgba(255,255,255,0.25)"/>
+  <circle cx="288" cy="170" r="6" fill="rgba(255,255,255,0.25)"/>
+  <circle cx="368" cy="170" r="6" fill="rgba(255,255,255,0.25)"/>
+
+  <!-- Texte "F1" en rouge, italique, gras -->
+  <text
+    x="218" y="388"
+    font-family="system-ui, -apple-system, Arial, sans-serif"
+    font-size="220"
+    font-weight="900"
+    font-style="italic"
+    fill="#e10600"
+    text-anchor="middle"
+    letter-spacing="-8"
+  >F1</text>
+
+  <!-- Texte "ARCADE" en blanc, sous F1 -->
+  <text
+    x="256" y="452"
+    font-family="system-ui, -apple-system, Arial, sans-serif"
+    font-size="52"
+    font-weight="700"
+    fill="#ffffff"
+    text-anchor="middle"
+    letter-spacing="18"
+  >ARCADE</text>
+
+</svg>

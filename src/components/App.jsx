@@ -3,9 +3,6 @@ import { Zap, Gauge, Home } from 'lucide-react';
 import ReactionGame from './ReactionGame.jsx';
 import TyreGame from './TyreGame.jsx';
 
-/**
- * Composant App : Navigation principale et dashboard
- */
 const App = () => {
   const [currentPage, setCurrentPage] = useState('home');
   const [reactionHighScore, setReactionHighScore] = useState(() => {
@@ -15,10 +12,9 @@ const App = () => {
 
   return (
     <div className="min-h-screen bg-f1-dark text-white">
-      {/* Header avec navigation */}
       <header className="bg-gradient-to-r from-gray-900 to-gray-800 border-b border-f1-red/30 sticky top-0 z-50">
         <div className="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
-          <h1 className="text-3xl font-bold text-f1-red tracking-wider">🏎️ F1 ARCADE</h1>
+          <img src="/fun-f1/fun_f1.png" alt="F1 Arcade" className="h-10 w-auto" />
           <nav className="flex gap-4">
             <button
               onClick={() => setCurrentPage('home')}
@@ -34,11 +30,9 @@ const App = () => {
         </div>
       </header>
 
-      {/* Contenu principal */}
       <main>
         {currentPage === 'home' && (
           <div className="min-h-screen bg-gradient-to-b from-f1-dark to-gray-900 flex flex-col items-center justify-center p-6">
-            {/* Logo et titre */}
             <div className="text-center mb-16">
               <h1 className="text-6xl font-bold mb-4">
                 <span className="text-f1-red">F1</span>{' '}
@@ -49,9 +43,7 @@ const App = () => {
               </p>
             </div>
 
-            {/* Grille de jeux */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mb-16">
-              {/* Carte Reaction Game */}
               <div
                 onClick={() => setCurrentPage('reaction')}
                 className="group cursor-pointer bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl p-8 border border-f1-red/30 hover:border-f1-red transition-all hover:shadow-glow transform hover:scale-105"
@@ -74,13 +66,9 @@ const App = () => {
                 </div>
               </div>
 
-              {/* Carte Tyre Game */}
               <div
                 onClick={() => setCurrentPage('tyre')}
                 className="group cursor-pointer bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl p-8 border border-f1-yellow/30 hover:border-f1-yellow transition-all hover:shadow-glow transform hover:scale-105"
-                style={{
-                  boxShadow: 'hover' ? '0 0 20px rgba(255, 204, 0, 0.3)' : 'none',
-                }}
               >
                 <div className="flex items-center justify-center mb-6 w-16 h-16 rounded-lg bg-f1-yellow/20 group-hover:bg-f1-yellow/40 transition-all">
                   <Gauge size={32} className="text-f1-yellow" />
@@ -92,12 +80,11 @@ const App = () => {
                 </p>
                 <div className="flex items-center justify-between">
                   <span className="text-sm text-gray-500">Difficulté: Progressive</span>
-                  <span className="text-f1-yellow font-bold">🔥 Défi</span>
+                  <span className="text-f1-yellow font-bold">Défi</span>
                 </div>
               </div>
             </div>
 
-            {/* Stats globales */}
             <div className="w-full max-w-4xl grid grid-cols-3 gap-4 bg-gray-800/50 rounded-lg p-6 border border-gray-700">
               <div className="text-center">
                 <p className="text-gray-400 text-sm mb-1">JEUX DISPONIBLES</p>
@@ -108,29 +95,19 @@ const App = () => {
                 <p className="text-lg font-bold text-f1-green">Web Audio API</p>
               </div>
               <div className="text-center">
-                <p className="text-gray-400 text-sm mb-1">PRÉCISION</p>
+                <p className="text-gray-400 text-sm mb-1">PRECISION</p>
                 <p className="text-lg font-bold text-f1-yellow">0.001ms</p>
               </div>
             </div>
           </div>
         )}
 
-        {currentPage === 'reaction' && (
-          <div onClick={() => setCurrentPage('reaction')}>
-            <ReactionGame />
-          </div>
-        )}
-
-        {currentPage === 'tyre' && (
-          <div onClick={() => setCurrentPage('tyre')}>
-            <TyreGame />
-          </div>
-        )}
+        {currentPage === 'reaction' && <ReactionGame onBack={() => setCurrentPage('home')} />}
+        {currentPage === 'tyre' && <TyreGame onBack={() => setCurrentPage('home')} />}
       </main>
 
-      {/* Footer */}
       <footer className="border-t border-gray-700 py-6 px-4 text-center text-gray-500 text-sm">
-        <p>🏁 F1 ARCADE © 2024 | Performance & Précision au Service du Racing</p>
+        <p>F1 ARCADE © 2024 | Performance & Précision au Service du Racing</p>
       </footer>
     </div>
   );
