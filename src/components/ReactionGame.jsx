@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { RotateCcw, Play, ArrowLeft } from 'lucide-react';
 import { useReactionTimer } from '../hooks/useReactionTimer.js';
 import { useF1Audio } from '../hooks/useF1Audio.js';
@@ -14,10 +14,13 @@ const ReactionGame = ({ onBack }) => {
     return saved ? parseFloat(saved) : Infinity;
   });
 
-  const { reactionTime, isActive, jumpStartDetected, startTimer, activateClick, recordReaction, reset } = useReactionTimer();
+  const { reactionTime, isActive, jumpStartDetected, canClick, startTimer, activateClick, recordReaction, reset } = useReactionTimer();
   const { playRedLight, playExtinction, playError, playSuccess } = useF1Audio();
+  const sequenceTokenRef = useRef(0);
 
   const handleStartGame = () => {
+    const myToken = ++sequenceTokenRef.current;
+
     reset();
     setResult(null);
     setGameStarted(true);
@@ -26,6 +29,7 @@ const ReactionGame = ({ onBack }) => {
     const sequence = async () => {
       for (let i = 0; i < 5; i++) {
         await new Promise(resolve => setTimeout(resolve, 1000));
+        if (sequenceTokenRef.current !== myToken) return;
         newLights[i] = true;
         setLights([...newLights]);
         playRedLight();
@@ -33,6 +37,7 @@ const ReactionGame = ({ onBack }) => {
 
       const extinctionDelay = 1000 + Math.random() * 3000;
       await new Promise(resolve => setTimeout(resolve, extinctionDelay));
+      if (sequenceTokenRef.current !== myToken) return;
 
       setLights([false, false, false, false, false]);
       playExtinction();
@@ -41,6 +46,14 @@ const ReactionGame = ({ onBack }) => {
 
     sequence();
     startTimer();
+  };
+
+  const handleReset = () => {
+    sequenceTokenRef.current += 1;
+    reset();
+    setResult(null);
+    setGameStarted(false);
+    setLights([false, false, false, false, false]);
   };
 
   const handleClickReaction = () => {
@@ -101,7 +114,7 @@ const ReactionGame = ({ onBack }) => {
             : 'bg-gray-600 text-gray-400 cursor-not-allowed'
         }`}
       >
-        {gameStarted ? (isActive ? 'GO!' : 'PRET') : 'ATTENDRE'}
+        {gameStarted ? (canClick ? 'GO!' : 'PRET') : 'ATTENDRE'}
       </button>
 
       {result && (
@@ -131,7 +144,7 @@ const ReactionGame = ({ onBack }) => {
         <button onClick={handleStartGame} className="btn-primary flex items-center gap-2">
           <Play size={20} /> Jouer
         </button>
-        <button onClick={() => { reset(); setResult(null); setGameStarted(false); setLights([false,false,false,false,false]); }} className="btn-secondary flex items-center gap-2">
+        <button onClick={handleReset} className="btn-secondary flex items-center gap-2">
           <RotateCcw size={20} /> Reinitialiser
         </button>
       </div>

@@ -4,6 +4,7 @@ export const useReactionTimer = () => {
   const [reactionTime, setReactionTime] = useState(null);
   const [isActive, setIsActive] = useState(false);
   const [jumpStartDetected, setJumpStartDetected] = useState(false);
+  const [canClick, setCanClick] = useState(false);
   const startTimeRef = useRef(null);
   const canClickRef = useRef(false);
 
@@ -11,6 +12,7 @@ export const useReactionTimer = () => {
     setReactionTime(null);
     setJumpStartDetected(false);
     setIsActive(true);
+    setCanClick(false);
     startTimeRef.current = null;
     canClickRef.current = false;
   };
@@ -18,6 +20,7 @@ export const useReactionTimer = () => {
   const activateClick = () => {
     startTimeRef.current = performance.now();
     canClickRef.current = true;
+    setCanClick(true);
   };
 
   const recordReaction = () => {
@@ -41,6 +44,7 @@ export const useReactionTimer = () => {
     setReactionTime(null);
     setIsActive(false);
     setJumpStartDetected(false);
+    setCanClick(false);
     startTimeRef.current = null;
     canClickRef.current = false;
   };
@@ -49,7 +53,7 @@ export const useReactionTimer = () => {
     reactionTime,
     isActive,
     jumpStartDetected,
-    canClick: canClickRef.current,
+    canClick,
     startTimer,
     activateClick,
     recordReaction,
