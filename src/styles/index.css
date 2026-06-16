@@ -42,6 +42,6 @@ body {
   }
 
   .light-blink {
-    @apply w-16 h-16 rounded-full transition-all duration-100;
+    @apply w-10 h-10 sm:w-16 sm:h-16 rounded-full transition-all duration-100;
   }
 }

@@ -96,7 +96,7 @@ const ReactionGame = ({ onBack }) => {
       <h1 className="text-5xl font-bold mb-2 text-f1-red tracking-wide">F1 REACTION</h1>
       <p className="text-gray-400 mb-12 text-center">Appuyez quand les feux s'eteignent</p>
 
-      <div className="flex gap-6 mb-12">
+      <div className="flex gap-3 sm:gap-6 mb-12">
         {lights.map((isLit, i) => (
           <div
             key={i}
