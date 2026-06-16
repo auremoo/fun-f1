@@ -13,12 +13,11 @@ export const useReactionTimer = () => {
     setIsActive(true);
     startTimeRef.current = null;
     canClickRef.current = false;
+  };
 
-    const randomDelay = 1000 + Math.random() * 3000;
-    setTimeout(() => {
-      startTimeRef.current = performance.now();
-      canClickRef.current = true;
-    }, randomDelay);
+  const activateClick = () => {
+    startTimeRef.current = performance.now();
+    canClickRef.current = true;
   };
 
   const recordReaction = () => {
@@ -52,6 +51,7 @@ export const useReactionTimer = () => {
     jumpStartDetected,
     canClick: canClickRef.current,
     startTimer,
+    activateClick,
     recordReaction,
     reset,
   };

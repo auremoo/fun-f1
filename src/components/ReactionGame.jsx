@@ -14,7 +14,7 @@ const ReactionGame = ({ onBack }) => {
     return saved ? parseFloat(saved) : Infinity;
   });
 
-  const { reactionTime, isActive, jumpStartDetected, startTimer, recordReaction, reset } = useReactionTimer();
+  const { reactionTime, isActive, jumpStartDetected, startTimer, activateClick, recordReaction, reset } = useReactionTimer();
   const { playRedLight, playExtinction, playError, playSuccess } = useF1Audio();
 
   const handleStartGame = () => {
@@ -36,6 +36,7 @@ const ReactionGame = ({ onBack }) => {
 
       setLights([false, false, false, false, false]);
       playExtinction();
+      activateClick();
     };
 
     sequence();
@@ -45,12 +46,14 @@ const ReactionGame = ({ onBack }) => {
   const handleClickReaction = () => {
     if (!gameStarted || !isActive) return;
     recordReaction();
+  };
 
+  useEffect(() => {
     if (jumpStartDetected) {
       playError();
       setResult({ type: 'jumpstart', message: 'FAUX DEPART (Jump Start)!' });
     }
-  };
+  }, [jumpStartDetected]);
 
   useEffect(() => {
     if (reactionTime !== null && !jumpStartDetected) {
