@@ -1,3 +1,4 @@
+// F1 Arcade — Auteur : Aurélien Moote - Moo - 2026 — Licence MIT
 import React, { useState } from 'react';
 import { Zap, Gauge, Home } from 'lucide-react';
 import ReactionGame from './ReactionGame.jsx';

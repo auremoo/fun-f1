@@ -1,3 +1,6 @@
+> Créé par **Aurélien Moote - Moo - 2026**. Logiciel libre (licence MIT) :
+> réutilisable à condition de conserver la mention de l'auteur.
+
 # F1 ARCADE
 
 Application web React avec deux mini-jeux F1 : test de temps de réaction et gestion de température des pneus.
@@ -59,6 +62,10 @@ Pour activer GitHub Pages : Settings → Pages → Source → **GitHub Actions**
 | Green | `#22c55e` | Succès / zone optimale |
 | Yellow | `#ffcc00` | Avertissement / pneus |
 
-## Licence
+## Auteur & licence
 
-MIT
+**Aurélien Moote - Moo - 2026**
+Copyright (c) 2026 Aurélien Moote ("Moo")
+Dépôt : https://github.com/auremoo/fun-f1
+
+Distribué sous licence **MIT** — réutilisable à condition de conserver la mention de l'auteur.

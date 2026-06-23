@@ -2,6 +2,8 @@
   "name": "f1-arcade",
   "private": true,
   "version": "0.0.1",
+  "author": "Aurélien Moote - Moo - 2026",
+  "license": "MIT",
   "type": "module",
   "scripts": {
     "dev": "vite",
