@@ -5,7 +5,7 @@ import { useF1Audio } from '../hooks/useF1Audio.js';
 
 const F1_AVERAGE = 200;
 
-const ReactionGame = ({ onBack }) => {
+const ReactionGame = ({ onBack, onNewHighScore }) => {
   const [lights, setLights] = useState([false, false, false, false, false]);
   const [gameStarted, setGameStarted] = useState(false);
   const [result, setResult] = useState(null);
@@ -75,6 +75,7 @@ const ReactionGame = ({ onBack }) => {
       if (isNewRecord) {
         localStorage.setItem('f1_high_score', reactionTime.toString());
         setHighScore(reactionTime);
+        onNewHighScore?.(reactionTime);
         playSuccess();
       } else {
         playExtinction();

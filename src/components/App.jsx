@@ -103,7 +103,12 @@ const App = () => {
           </div>
         )}
 
-        {currentPage === 'reaction' && <ReactionGame onBack={() => setCurrentPage('home')} />}
+        {currentPage === 'reaction' && (
+          <ReactionGame
+            onBack={() => setCurrentPage('home')}
+            onNewHighScore={setReactionHighScore}
+          />
+        )}
         {currentPage === 'tyre' && <TyreGame onBack={() => setCurrentPage('home')} />}
       </main>
 
