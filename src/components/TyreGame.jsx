@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Flame, RotateCcw, ArrowLeft } from 'lucide-react';
 
 const TYRE_NAMES = ['FL', 'FR', 'RL', 'RR'];
@@ -21,6 +21,11 @@ const TyreGame = ({ onBack }) => {
     const saved = localStorage.getItem('f1_tyre_high_score');
     return saved ? parseInt(saved) : 0;
   });
+  const temperaturesRef = useRef(temperatures);
+
+  useEffect(() => {
+    temperaturesRef.current = temperatures;
+  }, [temperatures]);
 
   useEffect(() => {
     if (!gameActive) return;
@@ -28,17 +33,15 @@ const TyreGame = ({ onBack }) => {
     const interval = setInterval(() => {
       setGameTime(t => t + 0.5);
 
-      setTemperatures(prev =>
-        prev.map(temp => {
-          const increase = 0.5 + gameLevel * 0.3 + Math.random() * 0.5;
-          return Math.min(temp + increase, 120);
-        })
-      );
-
-      setScore(prev => {
-        const tempAvg = temperatures.reduce((a, b) => a + b) / 4;
-        return prev + (tempAvg >= 80 && tempAvg <= 105 ? 10 : 2);
+      const updated = temperaturesRef.current.map(temp => {
+        const increase = 0.5 + gameLevel * 0.3 + Math.random() * 0.5;
+        return Math.min(temp + increase, 120);
       });
+      temperaturesRef.current = updated;
+      setTemperatures(updated);
+
+      const tempAvg = updated.reduce((a, b) => a + b, 0) / 4;
+      setScore(prev => prev + (tempAvg >= 80 && tempAvg <= 105 ? 10 : 2));
     }, 500);
 
     return () => clearInterval(interval);
