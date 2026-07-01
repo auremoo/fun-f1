@@ -1,8 +1,9 @@
 // F1 Arcade — Auteur : Aurélien Moote - Moo - 2026 — Licence MIT
 import React, { useState } from 'react';
-import { Zap, Gauge, Home } from 'lucide-react';
+import { Zap, Gauge, Home, Settings as SettingsIcon } from 'lucide-react';
 import ReactionGame from './ReactionGame.jsx';
 import TyreGame from './TyreGame.jsx';
+import Settings from './Settings.jsx';
 
 const App = () => {
   const [currentPage, setCurrentPage] = useState('home');
@@ -26,6 +27,16 @@ const App = () => {
               }`}
             >
               <Home size={18} /> Accueil
+            </button>
+            <button
+              onClick={() => setCurrentPage('settings')}
+              className={`flex items-center gap-2 px-4 py-2 rounded transition-all ${
+                currentPage === 'settings'
+                  ? 'bg-f1-red text-white'
+                  : 'bg-gray-700 hover:bg-gray-600'
+              }`}
+            >
+              <SettingsIcon size={18} /> Réglages
             </button>
           </nav>
         </div>
@@ -110,6 +121,7 @@ const App = () => {
           />
         )}
         {currentPage === 'tyre' && <TyreGame onBack={() => setCurrentPage('home')} />}
+        {currentPage === 'settings' && <Settings onBack={() => setCurrentPage('home')} />}
       </main>
 
       <footer className="border-t border-gray-700 py-6 px-4 text-center text-gray-500 text-sm">
